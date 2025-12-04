@@ -14,111 +14,70 @@
 
 ---
 
+# Graduate Admission Predictor (Keras/TensorFlow) 🎓
 
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.0%2B-orange)
+![Keras](https://img.shields.io/badge/Keras-Deep%20Learning-red)
+![Status](https://img.shields.io/badge/Status-Production-success)
 
+## 📋 Project Overview
+Esta aplicação é uma ferramenta de **Inteligência Artificial** desenvolvida para prever a probabilidade de admissão em programas de mestrado/doutoramento. Utilizando um modelo de **Rede Neural Profunda (DNN)** construído com **Keras** e **TensorFlow**, o sistema analisa métricas académicas padronizadas (como GRE, TOEFL e CGPA) para estimar a "Chance of Admit".
 
+O projeto destaca-se pela flexibilidade, oferecendo tanto uma interface interativa via terminal quanto capacidade de processamento em lote (batch processing) para análise de grandes volumes de dados.
 
+## 🚀 Features
+* **Motor de Inferência Keras:** Carregamento eficiente de modelos pré-treinados (`.keras`) para previsões instantâneas.
+* **Interactive CLI:** Interface de linha de comando robusta com validação de dados em tempo real para consultas individuais.
+* **Batch Processing:** Pipeline de processamento de arquivos CSV para gerar previsões em massa, ideal para análise de múltiplos candidatos simultaneamente.
+* **Data Validation:** Verificação automática de limites e tipos de dados (ex: GRE entre 260-340, TOEFL 0-120).
 
-# 🎓 Previsão de Admissão com Modelo Keras
+## 🛠️ Tech Stack
+* **Core:** Python 3
+* **ML Framework:** TensorFlow / Keras
+* **Data Manipulation:** Pandas, NumPy
+* **Model Persistence:** Keras SavedModel format
 
-Este projeto foi desenvolvido para a disciplina de **Inteligência Artificial e Machine Learning**, com o objetivo de utilizar um **modelo Keras pré-treinado** para prever a **Chance of Admit** de candidatos com base em características fornecidas pelo usuário.
+## 📊 Model Parameters
+O modelo foi treinado para analisar os seguintes atributos:
 
-O sistema também implementa o **desafio opcional**: previsão em lote via arquivo CSV. 🚀
+| Parâmetro | Descrição | Intervalo Típico |
+| :--- | :--- | :--- |
+| **GRE Score** | Graduate Record Examination | 260 - 340 |
+| **TOEFL Score** | Test of English as a Foreign Language | 0 - 120 |
+| **University Rating** | Classificação da Universidade de origem | 1 - 5 |
+| **SOP** | Força da Declaração de Propósito (Statement of Purpose) | 1 - 5 |
+| **LOR** | Força das Cartas de Recomendação | 1 - 5 |
+| **CGPA** | Cumulative Grade Point Average | 0 - 10 |
+| **Research** | Experiência em Investigação (0 = Não, 1 = Sim) | Binário |
+
+## ⚙️ Installation & Usage
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/BeiruthDEV/keras-admission-predictor.git](https://github.com/BeiruthDEV/keras-admission-predictor.git)
+    cd keras-admission-predictor
+    ```
+
+2.  **Instale as dependências:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Certifique-se do Modelo:**
+    Garanta que o ficheiro `modelo_treinado.keras` está na raiz do diretório.
+
+4.  **Execute a aplicação:**
+    ```bash
+    python prever_admissao.py
+    ```
+
+### Modos de Operação
+
+Ao iniciar, selecione o modo desejado:
+
+* **Modo 1 (Single Candidate):** Responda às perguntas no terminal para uma avaliação pontual.
+* **Modo 2 (Batch CSV):** Forneça o caminho de um arquivo CSV (ex: `entrada_teste.csv`) para gerar um relatório de saída (`predicoes_saida.csv`) com as probabilidades calculadas.
 
 ---
-
-## 📌 Funcionalidades
-
-✅ Carrega o modelo pré-treinado `modelo_treinado.keras`  
-✅ Solicita as características ao usuário pelo terminal  
-✅ Valida os valores conforme as regras de negócio  
-✅ Gera a previsão e exibe em **percentual**  
-✅ **Desafio Opcional:** permite previsão de múltiplos candidatos via CSV  
-✅ Gera automaticamente um arquivo `predicoes_saida.csv` com as probabilidades  
-
----
-
-## 🧠 Tecnologias Utilizadas
-
-- **Python 3.9**
-- **TensorFlow / Keras**
-- **NumPy**
-- **Pandas**
-
----
-
-## 📂 Estrutura do Projeto
-```bash
-📦 PrevisaoAdmissao
-┣ 📜 prever_admissao.py # Script principal
-┣ 📜 modelo_treinado.keras # Modelo pré-treinado (fornecido pelo professor)
-┣ 📜 entrada_teste.csv # CSV de exemplo para previsão em lote
-┗ 📜 README.md # Este arquivo
-```
----
-
-## 🖥️ Como Executar
-
-1. **Clone o repositório**
-```bash
-git clone https://github.com/BeiruthDEV/Previsao-Admissao-Keras.git
-cd Previsao-Admissao-Keras
-Instale as dependências
-```
-
-```bash
-
-pip install tensorflow pandas numpy
-Garanta que o modelo está na pasta
-Baixe modelo_treinado.keras do AVA e coloque na raiz do projeto.
-```
-
-Execute o script
-
-```bash
-
-python prever_admissao.py
-Escolha o modo
-
-Digite 1 para previsão de um único candidato
-
-Digite 2 para previsão via arquivo CSV (modo desafio opcional)
-```
-
-📊 Exemplo de Entrada (modo único)
-```bash
-
-text
-Copiar código
-GRE Score -> 312
-TOEFL Score -> 109
-University Rating -> 3
-SOP -> 3
-LOR -> 3
-CGPA -> 8.69
-Research -> 0
-```
-
-Saída esperada:
-```bash
-
-matlab
-Chance prevista de admissão: 78.52%
-```
-📑 Exemplo de CSV (modo lote)
-
-```bash
-
-GRE Score,TOEFL Score,University Rating,SOP,LOR,CGPA,Research
-312,109,3,3,3,8.69,0
-330,115,5,5,5,9.5,1
-280,90,2,2.5,2,7.0,0
-300,100,3,4,4,8.2,1
-340,120,5,5,5,9.9,1
-```
-Rodando no modo 2, será gerado um arquivo predicoes_saida.csv com o resultado de cada linha.
-
-Matheus Beiruth
-💼 Engenharia de Software | Backend Developer
-
-Este projeto foi desenvolvido para fins acadêmicos, como parte do trabalho da disciplina.
+*Desenvolvido por Matheus Beiruth como parte do portfólio de Machine Learning.*
